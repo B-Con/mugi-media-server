@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  plex:
+    image: plexinc/pms-docker:plexpass
+    environment:
+      TZ: America/Los_Angeles
+      PLEX_UID: 1000
+      PLEX_GID: 1000
+    network_mode: host
+    volumes:
+      - /tmp/var/lib/plexmediaserver:/config
+        #- /home/b-con/mugi-media-server/plex/config:/config
+      - /home/b-con/mugi-server/plex/transcode:/transcode
+      - /media/tea/music:/data/music
+      - /media/tea/pictures:/data/pictures
+      - /media/tea/video:/data/video
+    ports:
+      - 32400:32400/tcp
+
+  flickrsyncr:
+    image: primederivation/flickrsyncr:latest
+    environment:
+      TZ: America/Los_Angeles
+    network_mode: host
+    user: 1000:1000
+    volumes:
+      - /home/b-con/mugi-server/flickrsyncr/config:/config
+      - /media/tea/images/wallpapers:/data/wallpapers
+ 

@@ -1,9 +1,11 @@
 Server setup
 ---
 * Fetch config
-    * $ git clone https://github.com/B-Con/mugi-media-server.git
+    * `$ git clone https://github.com/B-Con/mugi-server.git`
 * Install packages
     * `$ apt-get install zfSnap`
+* SSH
+	* Setup SSH keys
 * ZFS
 	* `$ zpool import pot`
 	* ZFS daily backup
@@ -17,10 +19,9 @@ Server setup
  0  5  *  *  * /usr/sbin/zfSnap -v  -a 7d  -p cron-daily-   pot/tea >> /var/log/zfsnapcron.log
  0  5  *  *  1 /usr/sbin/zfSnap -v  -a 4w  -p cron-weekly-  pot/tea >> /var/log/zfsnapcron.log
  0  5  1  *  * /usr/sbin/zfSnap -v  -a 12m -p cron-monthly- pot/tea >> /var/log/zfsnapcron.log
-`
-* `$ docker compose Dockerfile`
-* `$ docker compose`
+* NFS
+	* TODO: nfs config...?`
+* `$ docker-compose build`
 * flickrsyncr
-	* install: flickrsyncr and the wrapper
-	* install cron:
-    ` *  6   *   *   *   /home/b-con/bin/flickrsyncr-wrapper`
+	* Create cron entry for the self-contained docker image:
+    ` *  6   *   *   *   /home/b-con/mugi-server/flickrsyncr/flickrsyncr-exporter.sh`
