@@ -1,30 +1,44 @@
 version: '3'
 
 services:
-  plex:
-    image: plexinc/pms-docker:plexpass
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
     environment:
+      PUID: 1000
+      GUID: 1000
+      UMASK_SET: '0022'
       TZ: America/Los_Angeles
-      PLEX_UID: 1000
-      PLEX_GID: 1000
     network_mode: host
+    restart: unless-stopped
     volumes:
-      - /tmp/var/lib/plexmediaserver:/config
-        #- /home/b-con/mugi-media-server/plex/config:/config
-      - /home/b-con/mugi-server/plex/transcode:/transcode
-      - /media/tea/music:/data/music
-      - /media/tea/pictures:/data/pictures
-      - /media/tea/video:/data/video
-    ports:
-      - 32400:32400/tcp
+      - /config/mugi-server/deluge/config:/config
+      - /media/tea/torrents:/torrents
 
   flickrsyncr:
     image: primederivation/flickrsyncr:latest
+    container_name: flickrsyncr
     environment:
       TZ: America/Los_Angeles
     network_mode: host
     user: 1000:1000
     volumes:
-      - /home/b-con/mugi-server/flickrsyncr/config:/config
+      - /config/mugi-server/flickrsyncr/config:/config
       - /media/tea/images/wallpapers:/data/wallpapers
  
+  plex:
+    image: plexinc/pms-docker:plexpass
+    container_name: plex
+    environment:
+      TZ: America/Los_Angeles
+      PLEX_UID: 1000
+      PLEX_GID: 1000
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /config/mugi-server/plex/config:/config
+      - /config/mugi-server/plex/transcode:/transcode
+      - /media/tea/music:/data/music
+      - /media/tea/pictures:/data/pictures
+      - /media/tea/video:/data/video
+
