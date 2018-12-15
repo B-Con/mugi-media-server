@@ -21,7 +21,12 @@ Server setup
  0  5  1  *  * /usr/sbin/zfSnap -v  -a 12m -p cron-monthly- pot/tea >> /var/log/zfsnapcron.log
 * NFS
 	* TODO: nfs config...?`
-* `$ docker-compose build`
+* SSH
+	* 
 * flickrsyncr
 	* Create cron entry for the self-contained docker image:
-    ` *  6   *   *   *   /home/b-con/mugi-server/flickrsyncr/flickrsyncr-exporter.sh`
+    ` *  6   *   *   *   /config/mugi-server/flickrsyncr/flickrsyncr-cron-wrapper.sh
+* Plex
+	* Restore saved state /config/Plex Library
+* Deluge
+	* Restore saved state (outside version control): delgue/state?
