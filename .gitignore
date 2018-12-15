@@ -1,5 +1,5 @@
 # Wildcard directories where apps will write data stores, caches, etc.
 # Manually add contents in them using `git add -f`.
-plex/config/*
 deluge/config/*
-
+flickrsyncr/config/*
+plex/config/*
