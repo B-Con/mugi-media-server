@@ -32,8 +32,10 @@ chmod 755 /config/mugi-server
 cd /config
 sudo -u b-con git pull https://github.con/B-Con/mugi-server.git
 
-# Restore ZFS pool "pot" into /media/tea.
+# Restore ZFS pool "pot", with volume "tea" into /media/tea.
+mkdir -p /media/pot
 mkdir -p /media/tea
+chown b-con:b-con /media/tea
 zpool import pot
 
 # Install custom system settings, reload the configs.

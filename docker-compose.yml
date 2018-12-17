@@ -9,6 +9,7 @@ services:
     volumes:
       - /config/mugi-server/caddy/caddycerts:/etc/caddycerts
       - /config/mugi-server/caddy/Caddyfile:/etc/Caddyfile
+      - /config/mugi-server/caddy/srv:/srv
 
   deluge:
     image: linuxserver/deluge
