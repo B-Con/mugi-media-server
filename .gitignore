@@ -3,3 +3,4 @@
 deluge/config/*
 flickrsyncr/config/*
 plex/config/*
+caddy/caddycerts/*
