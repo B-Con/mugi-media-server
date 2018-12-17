@@ -29,4 +29,7 @@ Manual steps for system rebuild:
 	* TODO: Restore caches into: `/config/mugi-server/plex/config`.
 * flickrsyncr
 	* Restore/setup API keys and OAuth into: `/config/mugi-server/flickrsyncr/config`.
+* Caddy
+	* When it's first run, configure the certs. They are saved into non-source controlled
+	`/config/mugi-server/caddy/caddycerts`.
 

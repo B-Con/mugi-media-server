@@ -8,7 +8,7 @@ S_GID=1000
 apt-get install openssh git sudo cron
 apt-get install zfsutils-linux zfsnap
 apt-get install vim traceroute tar gunzip
-apt-get install nfs-common
+apt-get install nfs-common nfs-kernel-server
 apt-get install docker docker-compose
 
 # Create the main user and a group named after them if they do not already
@@ -40,10 +40,12 @@ zpool import pot
 
 # Install custom system settings, reload the configs.
 # ./etc is a flat collection of /etc-esque files, NOT a skeleton /etc.
+
 install etc/sshd_config /etc/ssh/sshd_config
 install etc/exports     /etc/exports
 systemctl restart sshd
 systemctl restart nfs-server
+systemctl restart nfs-kernel-server
 
 # Install the crons.
 crontab -u $S_USER etc/crontab.b-con
@@ -57,4 +59,5 @@ read CONT
 # Start the services.
 docker-compose up deluge
 docker-compose up plex
-
+docker-compose up caddy
+# TODO: Configure caddy certs (and other?)
