@@ -4,24 +4,35 @@ S_USER=b-con
 S_UID=1000
 S_GID=1000
 
-# Install necessary pacakges.
-apt-get install openssh git sudo cron
-apt-get install zfsutils-linux zfsnap
-apt-get install vim traceroute tar gunzip
+# Install necessary core pacakges.
+apt-get install git sudo cron vim apt-transport-https traceroute tar gunzip smartmontools 
+
+# Install Docker.
+echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee -a /etc/apt/sources.list.d/docker.list
+# Install ZFS from contrib, see https://github.com/zfsonlinux/zfs/wiki/Debian
+echo "Edit /etc/apt/sources.list and add 'contrib'."
+read CONT
+vim /etc/apt/sources.list
+
+apt-get update
+apt-get install spl-dkms linux-headers-$(uname -r)
+apt-get install zfs-dkms zfsutils-linux zfsnap
+apt-get install docker-ce docker-compose
 apt-get install nfs-common nfs-kernel-server
-apt-get install docker docker-compose
 
 # Create the main user and a group named after them if they do not already
-# exist. Add dotfiles and SSH key login.
+# exist. Add dotfiles and SSH key login. Stomp whatever is already there.
 getent group $S_USER || groupadd -g $S_GID $S_USER
 getent passwd $S_USER || useradd -u $S_UID -g $G_UID -G sudo $S_USER
 sudo -u $S_USER /bin/sh <<EOF
-	cd ~
+	cd /tmp
 	git clone https://github.com/B-Con/dotfiles.git
-	cd .ssh
+	cd dotfiles/.ssh
 	cat id_mugi.pub >> authorized_keys
 	chmod 600 authorized_keys
 EOF
+rm -rf /home/b-con
+mv /tmp/dotfiles /home/b-con
 
 # Setup the server's config root.
 mkdir -p /config/mugi-server
@@ -30,7 +41,7 @@ chmod 755 /config
 chown b-con:b-con /config/mugi-server
 chmod 755 /config/mugi-server
 cd /config
-sudo -u b-con git pull https://github.con/B-Con/mugi-server.git
+sudo -u b-con git clone https://github.con/B-Con/mugi-server.git
 
 # Restore ZFS pool "pot", with volume "tea" into /media/tea.
 mkdir -p /media/pot
