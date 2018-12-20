@@ -1,6 +1,4 @@
-root /srv
-
-deluge.mugi, plex.mugi.bradconte.com {
+deluge.mugi, deluge.mugi.bradconte.com {
 	proxy / :8112 {
 		transparent
 		websocket
