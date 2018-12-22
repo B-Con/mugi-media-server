@@ -1,11 +1,11 @@
-deluge.mugi, deluge.mugi.bradconte.com {
+deluge.mugi.bradconte.com {
 	proxy / :8112 {
 		transparent
 		websocket
 	}
 }
 
-plex.mugi, plex.mugi.bradconte.com {
+plex.mugi.bradconte.com {
 	proxy / :32400 {
 		transparent
 		websocket
@@ -13,7 +13,7 @@ plex.mugi, plex.mugi.bradconte.com {
 }
 
 # Default landing page.
-mugi, mugi.bradconte.com {
+mugi.bradconte.com {
 	root /srv/mugi	
 }
 
