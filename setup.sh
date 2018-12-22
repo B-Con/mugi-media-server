@@ -5,7 +5,7 @@ S_UID=1000
 S_GID=1000
 
 # Install necessary core pacakges.
-apt-get install git sudo cron vim apt-transport-https traceroute tar gunzip smartmontools 
+apt-get install git sudo cron vim apt-transport-https traceroute tar gunzip smartmontools wget curl dnsutils ntp
 
 # Install Docker.
 echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee -a /etc/apt/sources.list.d/docker.list
