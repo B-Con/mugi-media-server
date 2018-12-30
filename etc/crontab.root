@@ -27,8 +27,8 @@
 #   * clean out old snapshots hourly
 #   * log to /var/log/zfsnapcron.log
 
- 0  *  *  *  * /usr/sbin/zfSnap -vd -a 24h -p cron-hourly-  pot/tea >> /var/log/zfsnapcron.log
- 0  5  *  *  * /usr/sbin/zfSnap -v  -a 7d  -p cron-daily-   pot/tea >> /var/log/zfsnapcron.log
- 0  5  *  *  1 /usr/sbin/zfSnap -v  -a 4w  -p cron-weekly-  pot/tea >> /var/log/zfsnapcron.log
- 0  5  1  *  * /usr/sbin/zfSnap -v  -a 12m -p cron-monthly- pot/tea >> /var/log/zfsnapcron.log
+ 0  *  *  *  * /usr/sbin/zfSnap -v -d -a 24h -p cron-hourly-  tea >> /var/log/zfsnapcron.log
+ 0  5  *  *  * /usr/sbin/zfSnap -v    -a 7d  -p cron-daily-   tea >> /var/log/zfsnapcron.log
+ 0  5  *  *  1 /usr/sbin/zfSnap -v    -a 4w  -p cron-weekly-  tea >> /var/log/zfsnapcron.log
+ 0  5  1  *  * /usr/sbin/zfSnap -v    -a 12m -p cron-monthly- tea >> /var/log/zfsnapcron.log
 
