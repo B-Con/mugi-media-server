@@ -10,28 +10,29 @@ S_GID=1000
 #####
 
 # Install core packages.
-apt-get install git sudo cron vim apt-transport-https tar gunzip smartmontools 
-apt-get install traceroute wget curl dnsutils ntp
+apt install git sudo cron vim apt-transport-https tar gunzip smartmontools 
+apt install traceroute wget curl dnsutils ntp iptables ufw
 
 # Enable contrib repo (necessary for ZFS).
 echo "Edit /etc/apt/sources.list and add 'contrib'."
 read CONT
 vim /etc/apt/sources.list
-apt-get update
+apt update
+apt upgrade
 
 # Install server-specific functionality.
 # ZFS docs: https://github.com/zfsonlinux/zfs/wiki/Debian
-apt-get install spl-dkms linux-headers-$(uname -r)
-apt-get install nfs-common nfs-kernel-server
-apt-get install zfs-dkms zfsutils-linux zfsnap
+apt get install spl-dkms linux-headers-$(uname -r)
+apt get install nfs-common nfs-kernel-server
+apt get install zfs-dkms zfsutils-linux zfsnap
 
 # Install Docker.
 # docker - community edition from docker repos
 # jq - json parser (for docker outputs)
 # docker-compose - direct pull because there's no package for some insane reason.
 echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee -a /etc/apt/sources.list.d/docker.list
-apt-get update
-apt-get install docker-ce jq
+apt update
+apt install docker-ce jq
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)
 " -o /usr/local/bin/docker-compose
 
