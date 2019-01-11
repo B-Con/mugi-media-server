@@ -33,6 +33,7 @@ PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
+AllowUsers b-con
 
 #PubkeyAuthentication yes
 
