@@ -67,11 +67,25 @@ zpool import pot
 
 # Install custom system settings, reload the configs.
 # ./etc is a flat collection of /etc-esque files, NOT a skeleton /etc.
-install etc/sshd_config /etc/ssh/sshd_config
-install etc/exports     /etc/exports
+install -m 644 etc/sshd_config      /etc/ssh/sshd_config
+install -m 644 etc/exports          /etc/exports
+install -m 644 etc/customssh-server /etc/ufw/applications.d/
+
+# Enable and start (restart in case any already started) services.
+systemctl enable sshd
 systemctl restart sshd
+systemctl enable nfs-server
 systemctl restart nfs-server
+systemctl enable nfs-kernel-server
 systemctl restart nfs-kernel-server
+systemctl enable ufw
+systemctl restart ufw
+
+# Setup firewall
+ufw allow https/tcp
+ufw allow SSH
+ufw allow Deluge
+ufw enable
 
 # Install the crons.
 crontab -u $S_USER etc/crontab.b-con
