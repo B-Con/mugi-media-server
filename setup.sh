@@ -11,7 +11,7 @@ S_GID=1000
 
 # Install core packages.
 apt install git sudo cron vim apt-transport-https tar gunzip smartmontools 
-apt install traceroute wget curl dnsutils ntp iptables ufw
+apt install traceroute wget curl dnsutils net-tools ntp iptables ufw sshguard
 
 # Enable contrib repo (necessary for ZFS).
 echo "Edit /etc/apt/sources.list and add 'contrib'."
@@ -67,9 +67,13 @@ zpool import pot
 
 # Install custom system settings, reload the configs.
 # ./etc is a flat collection of /etc-esque files, NOT a skeleton /etc.
-install -m 644 etc/sshd_config      /etc/ssh/sshd_config
-install -m 644 etc/exports          /etc/exports
-install -m 644 etc/customssh-server /etc/ufw/applications.d/
+install -m 644 etc/sshd_config         /etc/ssh/sshd_config
+install -m 644 etc/exports             /etc/exports
+install -m 644 etc/nfs-common          /etc/default/nfs-common
+install -m 644 etc/nfs-kernel-server   /etc/default/nfs-kernel-server
+install -m 644 etc/modprobe-local.conf /etc/modprobe.d/local.conf
+install -m 644 etc/custom-sshserver    /etc/ufw/applications.d/
+install -m 644 etc/custom-nfsserver    /etc/ufw/applications.d/
 
 # Enable and start (restart in case any already started) services.
 systemctl enable sshd
@@ -81,11 +85,27 @@ systemctl restart nfs-kernel-server
 systemctl enable ufw
 systemctl restart ufw
 
-# Setup firewall
+# Set up firewall
+ufw default allow outgoing
 ufw allow https/tcp
-ufw allow SSH
+ufw limit CustomSSH
 ufw allow Deluge
+ufw allow NFSDaemon
+ufw allow portmapper
+# Available but unnecessary(?): NFSKernel,mountd,statd
 ufw enable
+echo "Add sshguard to ufw in /etc/ufw/before.rules, after the line
+  # End required lines 
+
+add the following:
+
+# CUSTOM: sshguard
+:sshguard - [0:0]
+-A ufw-before-input -p tcp --dport 31416 -j sshguard
+# /CUSTOM
+"
+read CONT
+vim /etc/ufw/before.rules
 
 # Install the crons.
 crontab -u $S_USER etc/crontab.b-con

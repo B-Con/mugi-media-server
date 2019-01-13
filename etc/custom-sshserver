@@ -1,0 +1,5 @@
+[CustomSSH]
+title=Secure shell server, custom config
+description=OpenSSH is a free implementation of the Secure Shell protocol.
+ports=31416/tcp
+
