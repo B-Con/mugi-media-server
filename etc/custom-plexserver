@@ -1,0 +1,5 @@
+[Plex]
+title=Plex Media Server
+description=Plex Media Server
+ports=32400/tcp
+
