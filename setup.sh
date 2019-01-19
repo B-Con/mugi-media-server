@@ -22,9 +22,10 @@ apt upgrade
 
 # Install server-specific functionality.
 # ZFS docs: https://github.com/zfsonlinux/zfs/wiki/Debian
-apt get install spl-dkms linux-headers-$(uname -r)
-apt get install nfs-common nfs-kernel-server
-apt get install zfs-dkms zfsutils-linux zfsnap
+apt install spl-dkms linux-headers-$(uname -r)
+apt install nfs-common nfs-kernel-server
+apt install zfs-dkms zfsutils-linux zfsnap
+apt install openipmi ipmiutil
 
 # Install Docker.
 # docker - community edition from docker repos
@@ -90,6 +91,7 @@ ufw default allow outgoing
 ufw allow https/tcp
 ufw limit CustomSSH
 ufw allow Deluge
+ufw allow Plex
 ufw allow NFSDaemon
 ufw allow portmapper
 # Available but unnecessary(?): NFSKernel,mountd,statd
