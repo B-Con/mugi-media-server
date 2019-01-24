@@ -1,0 +1,40 @@
+[NFSDaemon]
+title=NFSv4 server
+description=NFSv4 server
+ports=2049/tcp
+
+[NFSKernel]
+title=NFS Kernel
+description=NFS Kernel
+ports=32764/tcp,32768/tcp
+
+[mountd]
+title=rpc.mountd
+description=rpc.mountd
+ports=32767/tcp
+
+[statd]
+title=rpc.statd
+description=rpc.statd
+ports=32765/tcp
+
+[Plex]
+title=Plex Media Server
+description=Plex Media Server
+ports=32400/tcp
+
+[CustomSSH]
+title=Secure shell server, custom config
+description=OpenSSH is a free implementation of the Secure Shell protocol.
+ports=31416/tcp
+
+[DelugeWeb]
+title=Deluge Web UI
+description=Deluge Web UI
+ports=8112/tcp
+
+[DelugeClient]
+title=Deluge Native Client
+description=Deluge native client
+ports=58846/tcp
+

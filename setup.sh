@@ -73,8 +73,7 @@ install -m 644 etc/exports             /etc/exports
 install -m 644 etc/nfs-common          /etc/default/nfs-common
 install -m 644 etc/nfs-kernel-server   /etc/default/nfs-kernel-server
 install -m 644 etc/modprobe-local.conf /etc/modprobe.d/local.conf
-install -m 644 etc/custom-sshserver    /etc/ufw/applications.d/
-install -m 644 etc/custom-nfsserver    /etc/ufw/applications.d/
+install -m 644 etc/custom-mugiservices /etc/ufw/applications.d/
 
 # Enable and start (restart in case any already started) services.
 systemctl enable sshd
