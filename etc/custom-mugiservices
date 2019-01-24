@@ -6,7 +6,7 @@ ports=2049/tcp
 [NFSKernel]
 title=NFS Kernel
 description=NFS Kernel
-ports=32764/tcp,32768/tcp
+ports=32764,32768/tcp
 
 [mountd]
 title=rpc.mountd
