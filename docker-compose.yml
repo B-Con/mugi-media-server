@@ -20,6 +20,11 @@ services:
       GUID: 1000
       UMASK_SET: '0022'
       TZ: America/Los_Angeles
+    healthcheck:
+      test: curl -f http://localhost:8112/ || exit 1
+      interval: 1m
+      timeout: 3s
+      retries: 5
     network_mode: host
     restart: unless-stopped
     volumes:
@@ -44,6 +49,11 @@ services:
       TZ: America/Los_Angeles
       PLEX_UID: 1000
       PLEX_GID: 1000
+    healthcheck:
+      test: curl -f http://localhost:32400/web/index.html || exit 1
+      interval: 1m
+      timeout: 3s
+      retries: 5
     network_mode: host
     restart: unless-stopped
     volumes:
