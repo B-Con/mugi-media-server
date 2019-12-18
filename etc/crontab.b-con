@@ -22,5 +22,5 @@
 # m h  dom mon dow   command
 
 # Daily at 6am.
- *  6   *   *   *   /config/mugi-server/flickrsyncr/flickrsyncr-cron-wrapper
+ *  6   *   *   *   /config/mugi-server/flickrsyncr/flickrsyncr-cron-wrapper.sh
 

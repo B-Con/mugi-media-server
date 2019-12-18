@@ -28,9 +28,9 @@
 #   * log to /var/log/zfsnapcron.log
 
  0  *  *  *  * /usr/sbin/zfSnap -v -d -a 24h -p cron-hourly-  tea >> /var/log/zfsnapcron.log
- 0  5  *  *  * /usr/sbin/zfSnap -v    -a 7d  -p cron-daily-   tea >> /var/log/zfsnapcron.log
- 0  5  *  *  1 /usr/sbin/zfSnap -v    -a 4w  -p cron-weekly-  tea >> /var/log/zfsnapcron.log
- 0  5  1  *  * /usr/sbin/zfSnap -v    -a 12m -p cron-monthly- tea >> /var/log/zfsnapcron.log
+ 0  5  *  *  * /usr/sbin/zfSnap -v -d -a 7d  -p cron-daily-   tea >> /var/log/zfsnapcron.log
+ 0  5  *  *  1 /usr/sbin/zfSnap -v -d -a 4w  -p cron-weekly-  tea >> /var/log/zfsnapcron.log
+ 0  5  1  *  * /usr/sbin/zfSnap -v -d -a 12m -p cron-monthly- tea >> /var/log/zfsnapcron.log
 
 # The plex image auto-updates on restart.
  0  5  1  *  * docker container restart plex

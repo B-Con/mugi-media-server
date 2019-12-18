@@ -12,6 +12,7 @@ S_GID=1000
 # Install core packages.
 apt install git sudo cron vim apt-transport-https tar gunzip smartmontools 
 apt install traceroute wget curl dnsutils net-tools ntp iptables ufw sshguard
+apt install htop stow
 
 # Enable contrib repo (necessary for ZFS).
 echo "Edit /etc/apt/sources.list and add 'contrib'."
@@ -59,6 +60,11 @@ chown $S_USER:$S_USER /config/mugi-server
 chmod 755 /config/mugi-server
 cd /config
 sudo -u $S_USER git clone https://github.con/B-Con/mugi-server.git
+
+# Setup python.
+apt install python3-pip python3-venv
+sudo -u $S_USER pip3 install pipx --user
+sudo -u $S_USER pipx install flickrsyncr
 
 # Restore ZFS pool "pot", with volume "tea" into /media/tea.
 mkdir -p /media/pot

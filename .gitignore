@@ -4,3 +4,5 @@ deluge/config/*
 flickrsyncr/config/*
 plex/config/*
 caddy/caddycerts/*
+oauth-tokens.sqlite
+
